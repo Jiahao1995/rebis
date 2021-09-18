@@ -34,6 +34,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 
+import static utils.Constants.SIZE_MAX_BUFFER_LENGTH;
+
 /**
  * A wrapper over {@link DatagramChannel} which can read and write data on a DatagramChannel.
  */
@@ -80,7 +82,7 @@ public class NioDatagramChannel
     public DatagramPacket read(SelectionKey key)
             throws IOException
     {
-        var buffer = ByteBuffer.allocate(1024);
+        var buffer = ByteBuffer.allocate(SIZE_MAX_BUFFER_LENGTH);
         var sender = ((DatagramChannel) key.channel()).receive(buffer);
 
         /*
